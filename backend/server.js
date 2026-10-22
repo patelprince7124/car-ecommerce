@@ -10,6 +10,12 @@ const cors =
 const dotenv =
   require("dotenv");
 
+const bcrypt =
+  require("bcryptjs");
+
+const User =
+  require("./models/User");
+
 dotenv.config();
 
 const app = express();
@@ -110,6 +116,52 @@ app.get("/", (req, res) => {
 const PORT =
   process.env.PORT || 5000;
 
+const ensureDefaultAdmin = async () => {
+  try {
+    const adminEmail =
+      process.env.ADMIN_EMAIL ||
+      "admin@luxurycars.com";
+
+    const adminPassword =
+      process.env.ADMIN_PASSWORD ||
+      "Admin@123";
+
+    const existingAdmin =
+      await User.findOne({
+        email: adminEmail,
+      });
+
+    if (existingAdmin) {
+      console.log(
+        "Admin user already exists"
+      );
+      return;
+    }
+
+    const hashedPassword =
+      await bcrypt.hash(
+        adminPassword,
+        10
+      );
+
+    await User.create({
+      name: "Admin",
+      email: adminEmail,
+      password: hashedPassword,
+      role: "admin",
+    });
+
+    console.log(
+      `Default admin created: ${adminEmail}`
+    );
+  } catch (error) {
+    console.log(
+      "Admin seed error:",
+      error
+    );
+  }
+};
+
 /* MONGODB */
 
 mongoose
@@ -122,6 +174,8 @@ mongoose
     console.log(
       "MongoDB Connected ✅"
     );
+
+    ensureDefaultAdmin();
 
     app.listen(PORT, () => {
 

@@ -40,8 +40,8 @@ const EditCar = () => {
     setImage] =
     useState("");
 
-  const [fuel,
-    setFuel] =
+  const [fuelType,
+    setFuelType] =
     useState("");
 
   const [transmission,
@@ -50,6 +50,34 @@ const EditCar = () => {
 
   const [year,
     setYear] =
+    useState("");
+
+  const [seats,
+    setSeats] =
+    useState("");
+
+  const [mileage,
+    setMileage] =
+    useState("");
+
+  const [color,
+    setColor] =
+    useState("");
+
+  const [topSpeed,
+    setTopSpeed] =
+    useState("");
+
+  const [driveType,
+    setDriveType] =
+    useState("");
+
+  const [engine,
+    setEngine] =
+    useState("");
+
+  const [vin,
+    setVin] =
     useState("");
 
   const [description,
@@ -89,8 +117,8 @@ const EditCar = () => {
             car.image || ""
           );
 
-          setFuel(
-            car.fuel || ""
+          setFuelType(
+            car.fuelType || ""
           );
 
           setTransmission(
@@ -99,6 +127,34 @@ const EditCar = () => {
 
           setYear(
             car.year || ""
+          );
+
+          setSeats(
+            car.seats || ""
+          );
+
+          setMileage(
+            car.mileage || ""
+          );
+
+          setColor(
+            car.color || ""
+          );
+
+          setTopSpeed(
+            car.topSpeed || ""
+          );
+
+          setDriveType(
+            car.driveType || ""
+          );
+
+          setEngine(
+            car.engine || ""
+          );
+
+          setVin(
+            car.vin || ""
           );
 
           setDescription(
@@ -130,9 +186,15 @@ const EditCar = () => {
         !brand ||
         !price ||
         !image ||
-        !fuel ||
+        !fuelType ||
         !transmission ||
         !year ||
+        !seats ||
+        !mileage ||
+        !color ||
+        !topSpeed ||
+        !driveType ||
+        !engine ||
         !description
       ) {
 
@@ -169,11 +231,18 @@ const EditCar = () => {
 
           name,
           brand,
-          price,
+          price: Number(price),
           image,
-          fuel,
+          fuelType,
           transmission,
-          year,
+          year: Number(year),
+          seats: Number(seats),
+          mileage: Number(mileage),
+          color,
+          topSpeed: Number(topSpeed),
+          driveType,
+          engine,
+          vin,
           description,
 
         };
@@ -187,7 +256,7 @@ const EditCar = () => {
           {
             headers: {
               Authorization:
-                `Bearer ${localStorage.getItem("token")}`,
+                `Bearer ${sessionStorage.getItem("token")}`,
             },
           }
         );
@@ -334,15 +403,141 @@ const EditCar = () => {
                     type="text"
 
                     placeholder=
-                    "Fuel"
+                    "Fuel Type"
 
                     className=
                     "form-control mb-4"
 
-                    value={fuel}
+                    value={fuelType}
 
                     onChange={(e) =>
-                      setFuel(
+                      setFuelType(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="number"
+
+                    placeholder=
+                    "Seats"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={seats}
+
+                    onChange={(e) =>
+                      setSeats(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="number"
+
+                    placeholder=
+                    "Mileage"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={mileage}
+
+                    onChange={(e) =>
+                      setMileage(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="text"
+
+                    placeholder=
+                    "Color"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={color}
+
+                    onChange={(e) =>
+                      setColor(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="number"
+
+                    placeholder=
+                    "Top Speed"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={topSpeed}
+
+                    onChange={(e) =>
+                      setTopSpeed(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="text"
+
+                    placeholder=
+                    "Drive Type"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={driveType}
+
+                    onChange={(e) =>
+                      setDriveType(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="text"
+
+                    placeholder=
+                    "Engine"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={engine}
+
+                    onChange={(e) =>
+                      setEngine(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="text"
+
+                    placeholder=
+                    "VIN (Optional)"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={vin}
+
+                    onChange={(e) =>
+                      setVin(
                         e.target.value
                       )
                     }

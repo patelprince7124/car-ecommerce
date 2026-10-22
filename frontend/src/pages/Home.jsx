@@ -21,6 +21,16 @@ const Home = () => {
     setCurrentIndex] =
     useState(0);
 
+  const user =
+    JSON.parse(
+      sessionStorage.getItem(
+        "user"
+      ) || "null"
+    );
+
+  const isAdmin =
+    user?.role === "admin";
+
   /* FETCH CARS */
 
   useEffect(() => {

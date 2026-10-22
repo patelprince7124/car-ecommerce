@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Navbar
-from "../components/Navbar";
+  from "../components/Navbar";
 
 // import cars
 // from "../data/carsData";
@@ -108,6 +108,7 @@ const TestBookings = () => {
 
         <div className="container">
 
+
           {/* TITLE */}
 
           <h1
@@ -143,6 +144,8 @@ const TestBookings = () => {
                   "col-lg-4 col-md-6 mb-4 d-flex"
 
                   key={index}
+y
+
                 >
 
                   <div
@@ -167,7 +170,7 @@ const TestBookings = () => {
                     {/* UPDATE */}
 
                     {editingId ===
-                    index ? (
+                      index ? (
 
                       <>
 

@@ -21,6 +21,16 @@ const bookingSchema =
         required: true,
       },
 
+      carImage: {
+        type: String,
+        default: "",
+      },
+
+      phone: {
+        type: String,
+        default: "",
+      },
+
       price: {
         type: Number,
         default: 5000,

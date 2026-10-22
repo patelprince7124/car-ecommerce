@@ -34,6 +34,34 @@ const AddCar = () => {
     setYear] =
     useState("");
 
+  const [seats,
+    setSeats] =
+    useState("");
+
+  const [mileage,
+    setMileage] =
+    useState("");
+
+  const [color,
+    setColor] =
+    useState("");
+
+  const [topSpeed,
+    setTopSpeed] =
+    useState("");
+
+  const [driveType,
+    setDriveType] =
+    useState("");
+
+  const [engine,
+    setEngine] =
+    useState("");
+
+  const [vin,
+    setVin] =
+    useState("");
+
   const [description,
     setDescription] =
     useState("");
@@ -43,119 +71,153 @@ const AddCar = () => {
     useState("");
 
   const handleAddCar =
-  async (e) => {
+    async (e) => {
 
-    e.preventDefault();
+      e.preventDefault();
 
-    /* VALIDATION */
+      /* VALIDATION */
 
-    if (
-      !title ||
-      !brand ||
-      !price ||
-      !image ||
-      !fuelType ||
-      !transmission ||
-      !year ||
-      !description
-    ) {
+      if (
+        !title ||
+        !brand ||
+        !price ||
+        !image ||
+        !fuelType ||
+        !transmission ||
+        !year ||
+        !seats ||
+        !mileage ||
+        !color ||
+        !topSpeed ||
+        !driveType ||
+        !engine ||
+        !description
+      ) {
 
-      return alert(
-        "All fields are required"
-      );
-    }
+        return alert(
+          "All fields are required"
+        );
+      }
 
-    /* PRICE */
+      /* PRICE */
 
-    if (
-      Number(price) <= 0
-    ) {
+      if (
+        Number(price) <= 0
+      ) {
 
-      return alert(
-        "Price must be greater than 0"
-      );
-    }
+        return alert(
+          "Price must be greater than 0"
+        );
+      }
 
-    /* YEAR */
+      /* YEAR */
 
-    if (
-      year.length !== 4
-    ) {
+      if (
+        year.length !== 4
+      ) {
 
-      return alert(
-        "Enter valid year"
-      );
-    }
+        return alert(
+          "Enter valid year"
+        );
+      }
 
-    try {
+      try {
 
-      const token =
-      localStorage.getItem(
-        "token"
-      );
+        const token =
+          sessionStorage.getItem(
+            "token"
+          );
 
-      const carData = {
+        const carData = {
 
-        title,
+          title,
 
-        brand,
+          brand,
 
-        price,
+          price: Number(price),
 
-        image,
+          image,
 
-        fuelType,
+          fuelType,
 
-        transmission,
+          transmission,
 
-        year,
+          year: Number(year),
 
-        description,
-      };
+          seats: Number(seats),
 
-      await API.post(
+          mileage: Number(mileage),
 
-        "/cars",
+          color,
 
-        carData,
+          topSpeed: Number(topSpeed),
 
-        {
-          headers: {
+          driveType,
 
-            Authorization:
-            `Bearer ${token}`,
-          },
-        }
-      );
+          engine,
 
-      setSuccess(
-        "Car Added Successfully 🚀"
-      );
+          vin,
 
-      /* CLEAR FORM */
+          description,
+        };
 
-      setTitle("");
+        await API.post(
 
-      setBrand("");
+          "/cars",
 
-      setPrice("");
+          carData,
 
-      setImage("");
+          {
+            headers: {
 
-      setFuelType("");
+              Authorization:
+                `Bearer ${token}`,
+            },
+          }
+        );
 
-      setTransmission("");
+        setSuccess(
+          "Car Added Successfully 🚀"
+        );
 
-      setYear("");
+        /* CLEAR FORM */
 
-      setDescription("");
+        setTitle("");
 
-    } catch (error) {
+        setBrand("");
 
-      console.log(error);
+        setPrice("");
 
-    }
-  };
+        setImage("");
+
+        setFuelType("");
+
+        setTransmission("");
+
+        setYear("");
+
+        setSeats("");
+
+        setMileage("");
+
+        setColor("");
+
+        setTopSpeed("");
+
+        setDriveType("");
+
+        setEngine("");
+
+        setVin("");
+
+        setDescription("");
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+    };
 
   return (
     <>
@@ -163,13 +225,13 @@ const AddCar = () => {
 
       <div
         style={{
-          background:"#0f0f0f",
+          background: "#0f0f0f",
 
-          minHeight:"100vh",
+          minHeight: "100vh",
 
-          color:"white",
+          color: "white",
 
-          padding:"60px 0",
+          padding: "60px 0",
         }}
       >
 
@@ -181,11 +243,11 @@ const AddCar = () => {
 
               <div
                 style={{
-                  background:"#1a1a1a",
+                  background: "#1a1a1a",
 
-                  padding:"40px",
+                  padding: "40px",
 
-                  borderRadius:"20px",
+                  borderRadius: "20px",
                 }}
               >
 
@@ -198,7 +260,7 @@ const AddCar = () => {
 
                   <span
                     style={{
-                      color:"#ff4d00",
+                      color: "#ff4d00",
                     }}
                   >
                     {" "}Car
@@ -234,7 +296,7 @@ const AddCar = () => {
 
                     value={title}
 
-                    onChange={(e)=>
+                    onChange={(e) =>
                       setTitle(
                         e.target.value
                       )
@@ -252,7 +314,7 @@ const AddCar = () => {
 
                     value={brand}
 
-                    onChange={(e)=>
+                    onChange={(e) =>
                       setBrand(
                         e.target.value
                       )
@@ -270,7 +332,7 @@ const AddCar = () => {
 
                     value={price}
 
-                    onChange={(e)=>
+                    onChange={(e) =>
                       setPrice(
                         e.target.value
                       )
@@ -288,7 +350,7 @@ const AddCar = () => {
 
                     value={fuelType}
 
-                    onChange={(e)=>
+                    onChange={(e) =>
                       setFuelType(
                         e.target.value
                       )
@@ -306,7 +368,7 @@ const AddCar = () => {
 
                     value={transmission}
 
-                    onChange={(e)=>
+                    onChange={(e) =>
                       setTransmission(
                         e.target.value
                       )
@@ -324,8 +386,43 @@ const AddCar = () => {
 
                     value={year}
 
-                    onChange={(e)=>
+                    onChange={(e) =>
                       setYear(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input type="number"
+
+                    placeholder=
+                    "Seats"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={seats}
+
+                    onChange={(e) =>
+                      setSeats(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="number"
+
+                    placeholder=
+                    "Mileage"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={mileage}
+
+                    onChange={(e) =>
+                      setMileage(
                         e.target.value
                       )
                     }
@@ -335,6 +432,95 @@ const AddCar = () => {
                     type="text"
 
                     placeholder=
+                    "Color"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={color}
+
+                    onChange={(e) =>
+                      setColor(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="number"
+
+                    placeholder=
+                    "Top Speed"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={topSpeed}
+
+                    onChange={(e) =>
+                      setTopSpeed(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="text"
+
+                    placeholder=
+                    "Drive Type"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={driveType}
+
+                    onChange={(e) =>
+                      setDriveType(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="text"
+
+                    placeholder=
+                    "Engine"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={engine}
+
+                    onChange={(e) =>
+                      setEngine(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input
+                    type="text"
+
+                    placeholder=
+                    "VIN (Optional)"
+
+                    className=
+                    "form-control mb-4"
+
+                    value={vin}
+
+                    onChange={(e) =>
+                      setVin(
+                        e.target.value
+                      )
+                    }
+                  />
+
+                  <input type="text"
+
+                    placeholder=
                     "Image URL"
 
                     className=
@@ -342,7 +528,7 @@ const AddCar = () => {
 
                     value={image}
 
-                    onChange={(e)=>
+                    onChange={(e) =>
                       setImage(
                         e.target.value
                       )
@@ -360,7 +546,7 @@ const AddCar = () => {
 
                     value={description}
 
-                    onChange={(e)=>
+                    onChange={(e) =>
                       setDescription(
                         e.target.value
                       )
@@ -372,13 +558,13 @@ const AddCar = () => {
                     "btn w-100"
 
                     style={{
-                      background:"#ff4d00",
+                      background: "#ff4d00",
 
-                      color:"white",
+                      color: "white",
 
-                      padding:"12px",
+                      padding: "12px",
 
-                      fontWeight:"bold",
+                      fontWeight: "bold",
                     }}
                   >
                     Add Car

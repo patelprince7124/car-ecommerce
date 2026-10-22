@@ -20,6 +20,16 @@ const Cars = () => {
   const [search, setSearch] =
     useState("");
 
+  const user =
+    JSON.parse(
+      sessionStorage.getItem(
+        "user"
+      ) || "null"
+    );
+
+  const isAdmin =
+    user?.role === "admin";
+
   /* PAGINATION */
 
   const [currentPage,
@@ -232,77 +242,6 @@ const Cars = () => {
                         </button>
 
                       </Link>
-
-                      {/* ADMIN BUTTONS */}
-
-                      {
-                        JSON.parse(
-                          localStorage.getItem(
-                            "user"
-                          )
-                        )?.isAdmin && (
-
-                          <div
-                            className=
-                            "d-flex gap-2 mt-3"
-                          >
-
-                            {/* EDIT */}
-
-                            <Link
-                              to={`/edit-car/${car._id}`}
-                              className="w-50"
-                            >
-
-                              <button
-                                className=
-                                "btn btn-warning w-100"
-                              >
-                                Edit
-                              </button>
-
-                            </Link>
-
-                            {/* DELETE */}
-
-                            <button
-                              className=
-                              "btn btn-danger w-50"
-
-                              onClick={async () => {
-
-                                const confirmDelete =
-                                  window.confirm(
-                                    "Delete this car?"
-                                  );
-
-                                if (
-                                  confirmDelete
-                                ) {
-
-                                  try {
-
-                                    await API.delete(
-                                      `/cars/${car._id}`
-                                    );
-
-                                    window.location.reload();
-
-                                  } catch (error) {
-
-                                    console.log(error);
-
-                                  }
-                                }
-                              }}
-                            >
-                              Delete
-                            </button>
-
-                          </div>
-
-                        )
-                      }
 
                     </div>
 

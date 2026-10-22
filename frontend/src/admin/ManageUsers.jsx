@@ -200,11 +200,11 @@ const ManageUsers = () => {
                       </th>
 
                       <th>
-                        Name
+                        Email
                       </th>
 
                       <th>
-                        Email
+                        Password
                       </th>
 
                       <th>
@@ -238,11 +238,11 @@ const ManageUsers = () => {
                             </td>
 
                             <td>
-                              {item.name}
+                              {item.email}
                             </td>
 
                             <td>
-                              {item.email}
+                              {item.password || "-"}
                             </td>
 
                             <td>

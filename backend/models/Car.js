@@ -32,11 +32,41 @@ const carSchema = new mongoose.Schema(
       required: true,
     },
 
-    horsepower: {
+    seats: {
       type: Number,
+      required: true,
+    },
+
+    mileage: {
+      type: Number,
+      required: true,
+    },
+
+    color: {
+      type: String,
+      required: true,
     },
 
     topSpeed: {
+      type: Number,
+      required: true,
+    },
+
+    driveType: {
+      type: String,
+      required: true,
+    },
+
+    engine: {
+      type: String,
+      required: true,
+    },
+
+    vin: {
+      type: String,
+    },
+
+    horsepower: {
       type: Number,
     },
 
@@ -50,7 +80,13 @@ const carSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+carSchema.virtual("name").get(function () {
+  return this.title;
+});
 
 module.exports = mongoose.model("Car", carSchema);

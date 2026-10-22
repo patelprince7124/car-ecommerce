@@ -220,8 +220,27 @@ const Bookings = () => {
                         ) : (
 
                           <>
-                        
 
+                            {booking.carImage && (
+                              <div
+                                className="mb-4"
+                                style={{
+                                  textAlign: "center",
+                                }}
+                              >
+                                <img
+                                  src={booking.carImage}
+                                  alt={booking.carName}
+                                  className="img-fluid"
+                                  style={{
+                                    width: "100%",
+                                    maxHeight: "220px",
+                                    objectFit: "cover",
+                                    borderRadius: "18px",
+                                  }}
+                                />
+                              </div>
+                            )}
                             {/* CAR NAME */}
 
                             <h2

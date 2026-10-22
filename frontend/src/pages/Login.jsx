@@ -136,8 +136,8 @@ const Login = () => {
 
         if (
 
-          response.data.user.email ===
-          "prince@gmail.com"
+          response.data.user.role ===
+          "admin"
 
         ) {
 

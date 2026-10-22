@@ -71,10 +71,13 @@ const CarDetails = () => {
 
   const user =
     JSON.parse(
-      localStorage.getItem(
+      sessionStorage.getItem(
         "user"
-      )
+      ) || "null"
     );
+
+  const isAdmin =
+    user?.role === "admin";
 
   /* FETCH CAR */
 
@@ -294,17 +297,12 @@ const CarDetails = () => {
             headers: {
 
               Authorization:
-                `Bearer ${localStorage.getItem(
-                  "token"
-                )
-                }`,
+                `Bearer ${sessionStorage.getItem("token")}`,
             },
           }
         );
 
-        alert(
-          "Car Deleted"
-        );
+        alert("Car Deleted");
 
         navigate("/cars");
 
@@ -376,7 +374,7 @@ const CarDetails = () => {
                   fontSize: "70px",
                 }}
               >
-                {car.name}
+                {car.name || car.title || "Car Details"}
               </h1>
 
               <h2
@@ -388,12 +386,29 @@ const CarDetails = () => {
                 ${car.price}
               </h2>
 
-              <p
-                className=
-                "text-secondary mt-4"
-              >
-                {car.description}
-              </p>
+              <div className="row mt-4 text-white">
+                <div className="col-md-6 mb-3">
+                  <p><strong>Brand:</strong> {car.brand}</p>
+                  <p><strong>Year:</strong> {car.year}</p>
+                  <p><strong>Transmission:</strong> {car.transmission}</p>
+                  <p><strong>Fuel Type:</strong> {car.fuelType}</p>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <p><strong>Seats:</strong> {car.seats || "N/A"}</p>
+                  <p><strong>Mileage:</strong> {car.mileage ?? "N/A"}</p>
+                  <p><strong>Color:</strong> {car.color || "N/A"}</p>
+                  <p><strong>Top Speed:</strong> {car.topSpeed ? `${car.topSpeed} km/h` : "N/A"}</p>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <p><strong>Drive Type:</strong> {car.driveType || "N/A"}</p>
+                  <p><strong>Engine:</strong> {car.engine || "N/A"}</p>
+                </div>
+                {car.vin && (
+                  <div className="col-md-6 mb-3">
+                    <p><strong>VIN:</strong> {car.vin}</p>
+                  </div>
+                )}
+              </div>
 
               {/* BUTTONS */}
 
@@ -444,8 +459,7 @@ const CarDetails = () => {
                 {/* ADMIN */}
 
                 {
-                  user?.email ===
-                  "prince@gmail.com" && (
+                  isAdmin && (
 
                     <>
                       <Link

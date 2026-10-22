@@ -136,6 +136,12 @@ router.post(
           carName:
             req.body.carName,
 
+          carImage:
+            req.body.carImage || "",
+
+          phone:
+            req.body.phone || "",
+
           price:
             req.body.price || 5000,
 
